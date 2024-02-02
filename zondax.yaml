@@ -1,4 +1,4 @@
-projectName: calamar
+projectName: giant-squid-explorer
 templates:
   - template: templates/earthly-dockerfile
   - template: templates/publish-earthly

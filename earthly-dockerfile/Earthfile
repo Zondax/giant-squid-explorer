@@ -3,7 +3,7 @@
 #
 VERSION 0.7
 FROM golang:1.19.6-alpine
-ARG --global BASE_NAME=calamar
+ARG --global BASE_NAME=giant-squid-explorer
 
 build-production:
     FROM DOCKERFILE -f ../Dockerfile ../+source-root/source-root/*
