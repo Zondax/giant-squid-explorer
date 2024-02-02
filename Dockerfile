@@ -14,6 +14,8 @@ ADD schema.graphql .
 RUN npm ci
 ADD tsconfig.json .
 ADD src src
+# remove if needed
+ADD manifests manifests
 RUN npm run build
 FROM node-with-gyp AS deps
 WORKDIR /squid
@@ -34,6 +36,8 @@ COPY --from=builder /squid/db db
 COPY --from=builder /squid/schema.graphql schema.graphql
 # remove if no commands.json is in the root
 ADD commands.json .
+# remove if no manifests folder
+COPY --from=builder /squid/manifests manifests
 RUN echo -e "loglevel=silent\\nupdate-notifier=false" > /squid/.npmrc
 RUN npm i -g @subsquid/commands && mv $(which squid-commands) /usr/local/bin/sqd
 ENV PROCESSOR_PROMETHEUS_PORT 3000
