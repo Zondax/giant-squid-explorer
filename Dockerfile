@@ -39,5 +39,5 @@ ADD commands.json .
 # remove if no manifests folder
 COPY --from=builder /squid/manifests manifests
 RUN echo -e "loglevel=silent\\nupdate-notifier=false" > /squid/.npmrc
-RUN npm i -g @subsquid/commands && mv $(which squid-commands) /usr/local/bin/sqd
+RUN npm i -g @subsquid/cli
 ENV PROCESSOR_PROMETHEUS_PORT 3000
