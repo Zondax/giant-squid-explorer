@@ -18,52 +18,88 @@ function getJSON(filename: string) {
 }
 
 export function getChainConfig(): ProcessorConfig {
+  let processorConfig: ProcessorConfig
   switch (process.env.CHAIN) {
     case 'kusama':
-      return require('./chains/kusama').default
+      processorConfig = require('./chains/kusama').default
+      break;
     case 'polkadot':
-      return require('./chains/polkadot').default
+      processorConfig = require('./chains/polkadot').default
+      break;
     case 'statemint':
-      return require('./chains/statemint').default
+      processorConfig = require('./chains/statemint').default
+      break;
     case 'statemine':
-      return require('./chains/statemine').default
+      processorConfig = require('./chains/statemine').default
+      break;
     case 'acala':
-      return require('./chains/acala').default
+      processorConfig = require('./chains/acala').default
+      break;
     case 'karura':
-      return require('./chains/karura').default
+      processorConfig = require('./chains/karura').default
+      break;
     case 'moonriver':
-      return require('./chains/moonriver').default
+      processorConfig = require('./chains/moonriver').default
+      break;
     case 'moonbeam':
-      return require('./chains/moonbeam').default
+      processorConfig = require('./chains/moonbeam').default
+      break;
     case 'moonbase':
-      return require('./chains/moonbase').default
+      processorConfig = require('./chains/moonbase').default
+      break;
     case 'bifrost':
-      return require('./chains/bifrost').default
+      processorConfig = require('./chains/bifrost').default
+      break;
     case 'phala':
-      return require('./chains/phala').default
+      processorConfig = require('./chains/phala').default
+      break;
     case 'khala':
-      return require('./chains/khala').default
+      processorConfig = require('./chains/khala').default
+      break;
     case 'gmordie':
-      return require('./chains/gmordie').default
+      processorConfig = require('./chains/gmordie').default
+      break;
     case 'astar':
-      return require('./chains/astar').default
+      processorConfig = require('./chains/astar').default
+      break;
     case 'shibuya':
-      return require('./chains/shibuya').default
+      processorConfig = require('./chains/shibuya').default
+      break;
     case 'shiden':
-      return require('./chains/shiden').default
+      processorConfig = require('./chains/shiden').default
+      break;
     case 'calamari':
-      return require('./chains/calamari').default
+      processorConfig = require('./chains/calamari').default
+      break;
     case 'subsocial':
-      return require('./chains/subsocial').default
+      processorConfig = require('./chains/subsocial').default
+      break;
     case 'efinity':
-      return require('./chains/efinity').default
+      processorConfig = require('./chains/efinity').default
+      break;
     case 'rococo':
-      return require('./chains/rococo').default
+      processorConfig = require('./chains/rococo').default
+      break;
     case 'interlay':
-      return require('./chains/interlay').default
+      processorConfig = require('./chains/interlay').default
+      break;
     case 'hydradx':
-      return require('./chains/hydradx').default
+      processorConfig = require('./chains/hydradx').default
+      break;
     default:
       throw new Error(`Unsupported chain ${process.env.CHAIN}`)
   }
+
+
+  const customChainNodeUrl = process.env.CHAIN_NODE_URL
+  const customChainArchiveUrl = process.env.CHAIN_ARCHIVE_URL
+  if(customChainNodeUrl){
+    processorConfig.dataSource = {...processorConfig.dataSource, chain: customChainNodeUrl}
+  }
+
+  if(customChainArchiveUrl){
+    processorConfig.dataSource = {...processorConfig.dataSource, archive: customChainArchiveUrl}
+  }
+
+  return processorConfig
 }
