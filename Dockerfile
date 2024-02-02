@@ -36,6 +36,7 @@ COPY --from=builder /squid/db db
 COPY --from=builder /squid/schema.graphql schema.graphql
 # remove if no commands.json is in the root
 ADD commands.json .
+RUN touch .env
 # remove if no manifests folder
 COPY --from=builder /squid/manifests manifests
 RUN echo -e "loglevel=silent\\nupdate-notifier=false" > /squid/.npmrc
