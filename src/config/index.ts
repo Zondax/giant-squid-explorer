@@ -93,12 +93,21 @@ export function getChainConfig(): ProcessorConfig {
 
   const customChainNodeUrl = process.env.CHAIN_NODE_URL
   const customChainArchiveUrl = process.env.CHAIN_ARCHIVE_URL
+  const blockFrom = process.env.BLOCK_START
   if(customChainNodeUrl){
     processorConfig.dataSource = {...processorConfig.dataSource, chain: customChainNodeUrl}
   }
 
   if(customChainArchiveUrl){
     processorConfig.dataSource = {...processorConfig.dataSource, archive: customChainArchiveUrl}
+  }
+
+  if(blockFrom){
+    if(isNaN(parseInt(blockFrom))){
+      throw new Error(`BLOCK_START should be a number`)
+    }
+
+    processorConfig.blockRange = {...processorConfig.blockRange, from: parseInt(blockFrom)}
   }
 
   return processorConfig
