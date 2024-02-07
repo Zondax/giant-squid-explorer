@@ -86,6 +86,9 @@ export function getChainConfig(): ProcessorConfig {
     case 'hydradx':
       processorConfig = require('./chains/hydradx').default
       break;
+    case 'paseo':
+      processorConfig = require('./chains/paseo').default
+      break;
     default:
       throw new Error(`Unsupported chain ${process.env.CHAIN}`)
   }
