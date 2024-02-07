@@ -93,7 +93,7 @@ export function getChainConfig(): ProcessorConfig {
 
   const customChainNodeUrl = process.env.CHAIN_NODE_URL
   const customChainArchiveUrl = process.env.CHAIN_ARCHIVE_URL
-  const blockFrom = process.env.BLOCK_STARTCHAIN_ARCHIVE_URL
+  const blockFrom = process.env.BLOCK_START
   const blockTo = process.env.BLOCK_TO
   if(customChainNodeUrl){
     processorConfig.dataSource = {...processorConfig.dataSource, chain: customChainNodeUrl}
